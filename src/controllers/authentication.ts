@@ -1,15 +1,14 @@
 import express from "express";
 
-import {createUser, getUsersByEmail} from "../src/db/users";
+import {createUser, getUsersByEmail} from "../db/users";
 import {authentication, random} from "../helpers/app";
 
-export const register = async (req:express.Request, res:express.Response) =>
-{
+export const register = async (req: express.Request, res: express.Response) => {
     try {
 
-        const {email,password,username} = req.body;
+        const {email, password, username} = req.body;
 
-        if (!email || !password || !username){
+        if (!email || !password || !username) {
             return res.sendStatus(400);
         }
 
@@ -23,14 +22,13 @@ export const register = async (req:express.Request, res:express.Response) =>
 
         const salt = random();
         const user = await createUser({
-            email,username, authentication:{
-                salt,password:authentication(salt,password)
+            email, username, authentication: {
+                salt, password: authentication(salt, password)
             },
         });
 
-        return  res.status(200).json(user).end();
-    }
-    catch (error) {
+        return res.status(200).json(user).end();
+    } catch (error) {
         console.log(error);
         return res.sendStatus(400);
     }
