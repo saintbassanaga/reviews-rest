@@ -28,6 +28,6 @@ server.listen(8080, () => {
 
 const MONGO_URL = 'mongodb+srv://saintbassanaga01:p5FC19BsPZopuI2i@reviewsdb.nofjnre.mongodb.net/?retryWrites=true&w=majority&appName=reviewsdb';
 mongoose.Promise = global.Promise;
-mongoose.connect(MONGO_URL);//.then(r => (console.log("Connection Created")), w => (console.log("Connection Lost!")));
+mongoose.connect(MONGO_URL).then(r => (console.log("Connection Created")), w => (console.log("Connection Lost!")));
 
 mongoose.connection.on('error', (error: Error)=> console.log(error));
